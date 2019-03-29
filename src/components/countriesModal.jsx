@@ -17,7 +17,7 @@ class CountryModal extends Component {
 
     render(){
         return(
-            <Modal trigger={<Button>Show Modal</Button>}>
+            <Modal trigger={<Button>Details</Button>}>
                 <Modal.Header>{this.props.country.name}</Modal.Header>
                 <Modal.Content image>
                 <Image wrapped size='medium' src={this.props.country.flag} />
