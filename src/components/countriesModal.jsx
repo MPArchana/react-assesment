@@ -27,6 +27,7 @@ class CountryModal extends Component {
                     <p>Native Name: {this.props.country.nativeName}</p>
                     <p>Population: {this.props.country.population}</p>
                     <p>Languages: {this.state.languages.join(', ')}</p>
+                    <Button onClick={() => this.props.func(this.props.country)}>Add</Button>
                 </Modal.Description>
                 </Modal.Content>
             </Modal>

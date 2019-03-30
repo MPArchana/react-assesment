@@ -12,7 +12,9 @@ class CountriesList extends Component {
             searchQuery: '',
             value:'',
             results: [],
+            dream: []
         }
+        this.addFavCountry = this.addFavCountry.bind(this);
     }
 
     async componentWillMount(){
@@ -24,6 +26,12 @@ class CountriesList extends Component {
         });
     }
 
+    addFavCountry(value) {
+      var intVal = this.state.dream;
+      var added = intVal.concat(value);
+      this.setState({dream: added});
+    }
+
     renderCountries(){
         return this.state.countries.map((country, index) => {
             return(
@@ -31,10 +39,24 @@ class CountriesList extends Component {
                     key={index}
                     image={country.flag}
                     header={country.name}
-                    extra = {<CountryModal country={country} />}
+                    extra = {<CountryModal country={country} func={this.addFavCountry} />}
                 />    
             )
         });
+    }
+
+    renderFavCountries(){
+        if (this.state.dream !== "") {
+            return this.state.dream.map((country, index) => {
+                return(
+                    <Card 
+                        key={index}
+                        image={country.flag}
+                        header={country.name}
+                    />    
+                )
+            });
+        }
     }
 
 
@@ -90,6 +112,10 @@ class CountriesList extends Component {
                                 onResultSelect={this.handleResultSelect}
                                 results={filteredResults}
                             />
+                            <Header>
+                              <p>DreamList</p>
+                              {this.renderFavCountries()}
+                            </Header>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
